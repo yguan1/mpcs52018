@@ -28,15 +28,8 @@ int main(int argc, char **argv){
   int ii,jj,kk;
   int B;
   double r;
-  long long *values;               /* PAPI results array */
   double ts,tf;
-  int Events[] = {PAPI_L1_DCM, PAPI_LD_INS};
   int ret;
-  int num_events = sizeof(Events)/sizeof(int);  /* size of event array */
-  char *event_name = (char *) malloc(128);        /* string name for event, reuse buffer */
-  float rtime, ptime, mflops;
-  long long flpops; 
-  char *event_name;
 
   if (argc < 2)
     B = 16;
@@ -52,9 +45,11 @@ int main(int argc, char **argv){
     }
   }
 
-  if ((ret=PAPI_start_counters(Events, num_events)) != PAPI_OK)
-    handle_error(ret);
-  PAPI_flops(&rtime, &ptime, &flpops, &mflops);
+  /* Start counting events */
+  ret = PAPI_hl_region_begin("mxm_tiled");
+  if ( ret != PAPI_OK )
+    handle_error(1);
+
   ts = timer();
   for (jj=0;jj<N;jj+=B){
     for (kk=0;kk<N;kk+=B){
@@ -69,15 +64,10 @@ int main(int argc, char **argv){
     }
   }
   tf = timer();
-  PAPI_flops(&rtime, &ptime, &flpops, &mflops);
-  if ((ret=PAPI_stop_counters(values, num_events)) != PAPI_OK)
+
+  ret = PAPI_hl_region_end("mxm_tiled");
+  if ( ret != PAPI_OK )
     handle_error(ret);
   
-  for (i=0;i<num_events;++i){       /* print name/value of each event counter */
-    PAPI_event_code_to_name(Events[i],event_name);
-    printf("%s:%lld\n", event_name, values[i]);
-  }
   printf("%f %f(s)\n", x[0][0],tf-ts);
-  printf("Number of floatinig point operations = %lld\n",flpops);
-  printf("mflops = %f\n",mflops);
 }
