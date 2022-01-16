@@ -28,11 +28,12 @@ int main(int argc, char **argv){
   long long *values;               /* PAPI results array */
   double ts,tf;
   int Events[] = {PAPI_L1_DCM, PAPI_LD_INS};
-  int ret
-  num_events = sizeof(Events)/sizeof(int);  /* size of event array */
-  event_name = (char *) malloc(128);        /* string name for event, reuse buffer */
+  int ret;
+  int num_events = sizeof(Events)/sizeof(int);  /* size of event array */
+  char *event_name = (char *) malloc(128);        /* string name for event, reuse buffer */
   float rtime, ptime, mflops;
-  long long flpops; 
+  long long flpops;
+  
 
 
   
