@@ -41,6 +41,7 @@ int main(int argc, char **argv){
 
   /* Start counting events */
   ret = PAPI_hl_region_begin("mxm");
+  print(ret)
   if ( ret != PAPI_OK )
     handle_error(1);
   
