@@ -4,5 +4,6 @@ module load papi/6.0
 # gcc -I/usr/local/papi/6.0/include -c mxm_tiled_papi.c  
 # gcc -o mxm_tiled_papi mxm_tiled_papi.o -L/usr/local/papi/6.0/lib -lpapi
 
-gcc -O2 -I/usr/local/papi/6.0/include -c loop_papi.c  
-gcc -O2 -o loop_papi loop_papi.o -L/usr/local/papi/6.0/lib -lpapi
+gcc -O2 -S loop_papi.c
+gcc -O2 -march=nocona -I/usr/local/papi/6.0/include -c loop_papi.c  
+gcc -O2 -march=nocona -o loop_papi loop_papi.o -L/usr/local/papi/6.0/lib -lpapi -lm
