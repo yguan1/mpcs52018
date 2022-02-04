@@ -1,0 +1,4 @@
+#!/bin/csh
+set echo on
+gcc -fopenmp -DOMP -O2 -I/usr/local/papi/6.0/include -c dotp_omp.c
+gcc -fopenmp -DOMP -O2 -o dotp_omp dotp_omp.o -L/usr/local/papi/6.0/lib -lpapi
