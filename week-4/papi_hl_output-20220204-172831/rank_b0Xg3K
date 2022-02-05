@@ -1,0 +1,24 @@
+{
+  "cpu in mhz":"4000",
+  "threads":[
+    {
+      "id":"139662556682112",
+      "regions":[
+        {
+          "daxpy_opt":{
+            "region_count":"1",
+            "cycles":"863344528",
+            "PAPI_DP_OPS":"500000006"
+          }
+        },
+        {
+          "daxpy_naive":{
+            "region_count":"1",
+            "cycles":"3367128026",
+            "PAPI_DP_OPS":"500000006"
+          }
+        }
+      ]
+    }
+  ]
+}
