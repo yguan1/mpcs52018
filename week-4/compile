@@ -1,0 +1,4 @@
+#!/bin/csh
+set echo on
+gcc -O2 -I/usr/local/papi/6.0/include -c dotp_blocked_strided.c
+gcc -O2 -o dotp_blocked_strided dotp_blocked_strided.o -L/usr/local/papi/6.0/lib -lpapi
