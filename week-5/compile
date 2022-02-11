@@ -1,0 +1,7 @@
+#!/bin/csh
+set echo on
+module load papi/6.0
+
+gcc -O2 -I/usr/local/papi/6.0/include -c test_tlb.c
+gcc -O2 -o test_tlb test_tlb.o -L/usr/local/papi/6.0/lib -lpapi -lm
+
